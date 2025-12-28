@@ -14,22 +14,22 @@
         <label>Received By</label><input name="received_by" required />
         <label>Notes</label><input name="notes" />
         <button type="submit">Confirm</button>
-    </form>
+    </form onsubmit="submitReceipt(event)">
     <pre id="result"></pre>
-    <script>
-        async function submitReceipt(e) {
-            e.preventDefault();
-            const form = e.target;
-            const payload = {
-                po_id: parseInt(form.po_id.value),
-                received_quantity: parseInt(form.received_quantity.value),
-                received_by: form.received_by.value,
-                notes: form.notes.value
-            };
-            const r = await fetch('/po/receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-            document.getElementById('result').textContent = await r.text();
-        }
-    </script>
+    <script src="/app/static/app.js"></script>>
+    <!--    async function submitReceipt(e) {
+    //         e.preventDefault();
+    //         const form = e.target;
+    //         const payload = {
+    //             po_id: parseInt(form.po_id.value),
+    //             received_quantity: parseInt(form.received_quantity.value),
+    //             received_by: form.received_by.value,
+    //             notes: form.notes.value
+    //         };
+    //         const r = await fetch('/po/receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    //         document.getElementById('result').textContent = await r.text();
+    /     }
+      </script> -->
 </body>
 
 </html>

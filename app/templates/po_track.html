@@ -13,21 +13,21 @@
         <label>Status Update</label><input name="status_update" placeholder="Dispatched / Delivered ..." required />
         <label>Comment</label><input name="comment" />
         <button type="submit">Update</button>
-    </form>
+    </form onsubmit="submitTrack(event)">
     <pre id="result"></pre>
-    <script>
-        async function submitTrack(e) {
-            e.preventDefault();
-            const form = e.target;
-            const payload = {
-                po_id: parseInt(form.po_id.value),
-                status_update: form.status_update.value,
-                comment: form.comment.value
-            };
-            const r = await fetch('/po/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-            document.getElementById('result').textContent = await r.text();
-        }
-    </script>
+    <script src="/app/static/app.js"></script>>
+    <!-- async function submitTrack(e) {
+    //         e.preventDefault();
+    //         const form = e.target;
+    //         const payload = {
+    //             po_id: parseInt(form.po_id.value),
+    //             status_update: form.status_update.value,
+    //             comment: form.comment.value
+    //         };
+    //         const r = await fetch('/po/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    //         document.getElementById('result').textContent = await r.text();
+    //     }
+    <!-- // </script> -->
 </body>
 
 </html>

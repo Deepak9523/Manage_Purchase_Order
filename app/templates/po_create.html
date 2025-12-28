@@ -17,20 +17,20 @@
         <button type="submit">Create</button>
     </form>
     <pre id="result"></pre>
-    <script>
-        async function submitPO(e) {
-            e.preventDefault();
-            const form = e.target;
-            const payload = {
-                product_name: form.product_name.value,
-                quantity: parseInt(form.quantity.value),
-                unit_price: parseFloat(form.unit_price.value),
-                supplier: form.supplier.value
-            };
-            const r = await fetch('/po/create', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-            document.getElementById('result').textContent = await r.text();
-        }
-    </script>
+    <script src="/app/static/app.js"></script>
+    <!-- async function submitPO(e) {
+        //     e.preventDefault();
+        //     const form = e.target;
+        //     const payload = {
+        //         product_name: form.product_name.value,
+        //         quantity: parseInt(form.quantity.value),
+        //         unit_price: parseFloat(form.unit_price.value),
+        //         supplier: form.supplier.value
+        //     };
+        //     const r = await fetch('/po/create', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        //     document.getElementById('result').textContent = await r.text();
+        // }
+     </script> -->
 </body>
 
 </html>
