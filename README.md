@@ -59,6 +59,65 @@ Dashboard: http://127.0.0.1:8000/po/manage
 
 API Docs: http://127.0.0.1:8000/docs
 
+# API Testing
+1. PO created :-
+API :-http://localhost:8000/po/create/
+
+Post Data:- 
+
+{
+
+  "product_name": "Laptop1",
+  
+  "quantity": 10,
+  
+  "unit_price": 55000,
+  
+  "supplier": "hp"
+  
+}
+
+2. PO Track
+
+API:-http://localhost:8000/po/track/
+
+Post Data:-
+
+{
+
+  "po_id": 1,
+  
+  "status_update": "Approved",
+  
+  "comment": "Approved by manager"
+  
+}
+
+3. PO Recipt
+
+API :-http://localhost:8000/po/receipt/
+
+Post Data:-
+{
+
+  "po_id": 1,
+  
+  "received_quantity": 10,
+  
+  "received_by": "Store Manager",
+  
+  "notes": "All items received"
+  
+}
+
+4. PO details with tracking & receipts
+
+Get API :- http://localhost:8000/po/{id}/
+
+
+
+
+
 # Endpoints
 POST /po/create → Create new PO
 
