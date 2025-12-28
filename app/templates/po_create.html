@@ -1,0 +1,118 @@
+<!-- first code -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Create PO</title>
+</head>
+
+<body>
+    <h3>Create PO</h3>
+    <form method="post" action="/po/create" onsubmit="submitPO(event)">
+        <label>Product Name</label><input name="product_name" required />
+        <label>Quantity</label><input name="quantity" type="number" min="1" required />
+        <label>Unit Price</label><input name="unit_price" type="number" step="0.01" min="0.01" required />
+        <label>Supplier</label><input name="supplier" required />
+        <button type="submit">Create</button>
+    </form>
+    <pre id="result"></pre>
+    <script>
+        async function submitPO(e) {
+            e.preventDefault();
+            const form = e.target;
+            const payload = {
+                product_name: form.product_name.value,
+                quantity: parseInt(form.quantity.value),
+                unit_price: parseFloat(form.unit_price.value),
+                supplier: form.supplier.value
+            };
+            const r = await fetch('/po/create', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            document.getElementById('result').textContent = await r.text();
+        }
+    </script>
+</body>
+
+</html>
+<!-- 
+End code -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Create PO</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script defer src="/static/app.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="header-icon">PO</div>
+                <h2>Create purchase order</h2>
+            </div>
+
+            <form class="form" onsubmit="submitPO(event)">
+                <label class="label">Product name</label>
+                <input class="input" name="product_name" required />
+
+                <label class="label">Quantity</label>
+                <input class="input" name="quantity" type="number" min="1" required />
+
+                <label class="label">Unit price</label>
+                <input class="input" name="unit_price" type="number" step="0.01" min="0.01" required />
+
+                <label class="label">Supplier</label>
+                <input class="input" name="supplier" required />
+
+                <div class="actions">
+                    <button class="button" type="submit">Create PO</button>
+                    <a class="button secondary" href="/po/manage">Back</a>
+                </div>
+            </form>
+
+            <div class="result" id="result"></div>
+
+            <div class="badge">Tip: Open <span class="kbd">/docs</span> for API testing.</div>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+            <h3 style="margin-top:0;">Recent PO (enter ID to view)</h3>
+            <form class="form" onsubmit="fetchPO(event)">
+                <label class="label">PO ID</label>
+                <input class="input" name="po_id" type="number" min="1" required />
+                <div class="actions">
+                    <button class="button" type="submit">Fetch</button>
+                </div>
+            </form>
+            <div class="result" id="result2"></div>
+        </div>
+    </div>
+
+    <script>
+        async function submitPO(e) {
+            e.preventDefault();
+            const f = e.target;
+            const payload = {
+                product_name: f.product_name.value,
+                quantity: parseInt(f.quantity.value),
+                unit_price: parseFloat(f.unit_price.value),
+                supplier: f.supplier.value
+            };
+            const data = await postJSON('/po/create', payload);
+            setResult(document.getElementById('result'), data);
+        }
+        async function fetchPO(e) {
+            e.preventDefault();
+            const id = parseInt(e.target.po_id.value);
+            const r = await fetch(`/po/${id}`);
+            const text = await r.text();
+            let data; try { data = JSON.parse(text); } catch { data = text; }
+            setResult(document.getElementById('result2'), data);
+        }
+    </script>
+</body>
+
+</html> -->

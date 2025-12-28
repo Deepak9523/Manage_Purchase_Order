@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>PO Receipt Confirmation</title>
+</head>
+
+<body>
+    <h3>PO Receipt Confirmation</h3>
+    <form method="post" action="/po/receipt" onsubmit="submitReceipt(event)">
+        <label>PO ID</label><input name="po_id" type="number" min="1" required />
+        <label>Received Quantity</label><input name="received_quantity" type="number" min="1" required />
+        <label>Received By</label><input name="received_by" required />
+        <label>Notes</label><input name="notes" />
+        <button type="submit">Confirm</button>
+    </form>
+    <pre id="result"></pre>
+    <script>
+        async function submitReceipt(e) {
+            e.preventDefault();
+            const form = e.target;
+            const payload = {
+                po_id: parseInt(form.po_id.value),
+                received_quantity: parseInt(form.received_quantity.value),
+                received_by: form.received_by.value,
+                notes: form.notes.value
+            };
+            const r = await fetch('/po/receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            document.getElementById('result').textContent = await r.text();
+        }
+    </script>
+</body>
+
+</html>
